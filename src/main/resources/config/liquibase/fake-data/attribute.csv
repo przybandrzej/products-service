@@ -1,0 +1,11 @@
+id;name;is_string;is_long;is_double;is_date;is_boolean
+1;Colombian Peso Unidad de Valor Real architect Extension;false;true;true;true;true
+2;Plastic metrics;false;false;false;false;true
+3;utilisation;false;true;false;false;false
+4;Illinois;true;false;false;false;false
+5;Facilitator Avon infrastructures;false;false;false;false;true
+6;override Bacon Berkshire;true;true;false;true;false
+7;Robust;false;false;false;false;false
+8;Small Wooden Sausages invoice;false;true;false;false;true
+9;policy;true;false;true;false;true
+10;Ergonomic;true;true;false;false;true

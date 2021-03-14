@@ -1,0 +1,11 @@
+package tech.przybysz.pms.repository;
+
+import tech.przybysz.pms.domain.Authority;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ * Spring Data JPA repository for the {@link Authority} entity.
+ */
+public interface AuthorityRepository extends JpaRepository<Authority, String> {
+}

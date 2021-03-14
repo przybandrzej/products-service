@@ -1,7 +1,6 @@
 package tech.przybysz.pms.config.timezone;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.repository.timezone.DateTimeWrapper;
 import tech.przybysz.pms.repository.timezone.DateTimeWrapperRepository;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,29 +1,8 @@
-# ===================================================================
-# Spring Boot configuration for the "prod" profile.
-#
-# This configuration overrides the application.yml file.
-#
-# More information on profiles: https://www.jhipster.tech/profiles/
-# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
-# ===================================================================
-
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
-
 logging:
   level:
     ROOT: INFO
     io.github.jhipster: INFO
     tech.przybysz.pms: INFO
-
-management:
-  metrics:
-    export:
-      prometheus:
-        enabled: false
 
 spring:
   devtools:
@@ -33,9 +12,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/producsts_service
-    username: producsts_service
-    password: producsts_service
+    url: jdbc:postgresql://localhost:5432/products_service
+    username: products_service
+    password: products_service
     hikari:
       poolName: Hikari
       auto-commit: false

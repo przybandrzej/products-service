@@ -1,7 +1,6 @@
 package tech.przybysz.pms.web.rest;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.domain.Product;
 import tech.przybysz.pms.repository.ProductRepository;
 import tech.przybysz.pms.service.ProductService;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -148,7 +146,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllProductsWithEagerRelationshipsIsEnabled() throws Exception {
         when(productServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));

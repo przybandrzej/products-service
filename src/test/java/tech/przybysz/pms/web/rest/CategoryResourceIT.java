@@ -1,7 +1,6 @@
 package tech.przybysz.pms.web.rest;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.domain.Category;
 import tech.przybysz.pms.repository.CategoryRepository;
 import tech.przybysz.pms.service.CategoryService;
@@ -134,7 +133,7 @@ public class CategoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(category.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getCategory() throws Exception {

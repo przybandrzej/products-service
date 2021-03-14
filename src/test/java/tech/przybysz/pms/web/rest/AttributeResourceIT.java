@@ -1,7 +1,6 @@
 package tech.przybysz.pms.web.rest;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.domain.Attribute;
 import tech.przybysz.pms.repository.AttributeRepository;
 import tech.przybysz.pms.service.AttributeService;
@@ -169,7 +168,7 @@ public class AttributeResourceIT {
             .andExpect(jsonPath("$.[*].isDate").value(hasItem(DEFAULT_IS_DATE.booleanValue())))
             .andExpect(jsonPath("$.[*].isBoolean").value(hasItem(DEFAULT_IS_BOOLEAN.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getAttribute() throws Exception {

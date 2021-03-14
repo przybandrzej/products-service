@@ -1,7 +1,6 @@
 package tech.przybysz.pms.web.rest;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.domain.Brand;
 import tech.przybysz.pms.repository.BrandRepository;
 import tech.przybysz.pms.service.BrandService;
@@ -134,7 +133,7 @@ public class BrandResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(brand.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getBrand() throws Exception {

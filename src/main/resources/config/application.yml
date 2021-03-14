@@ -1,62 +1,3 @@
-# ===================================================================
-# Spring Boot configuration.
-#
-# This configuration will be overridden by the Spring profile you use,
-# for example application-dev.yml if you use the "dev" profile.
-#
-# More information on profiles: https://www.jhipster.tech/profiles/
-# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
-# ===================================================================
-
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
-
-management:
-  endpoints:
-    web:
-      base-path: /management
-      exposure:
-        include: ['configprops', 'env', 'health', 'info', 'jhimetrics', 'logfile', 'loggers', 'prometheus', 'threaddump']
-  endpoint:
-    health:
-      show-details: when_authorized
-      roles: 'ROLE_ADMIN'
-    jhimetrics:
-      enabled: true
-  info:
-    git:
-      mode: full
-  health:
-    mail:
-      enabled: false # When using the MailService, configure an SMTP server and set this to true
-  metrics:
-    export:
-      # Prometheus is the default metrics backend
-      prometheus:
-        enabled: true
-        step: 60
-    enable:
-      http: true
-      jvm: true
-      logback: true
-      process: true
-      system: true
-    distribution:
-      percentiles-histogram:
-        all: true
-      percentiles:
-        all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
-    tags:
-      application: ${spring.application.name}
-    web:
-      server:
-        request:
-          autotime:
-            enabled: true
-
 spring:
   application:
     name: ProductsService
@@ -111,16 +52,6 @@ spring:
   output:
     ansi:
       console-available: true
-  security:
-    oauth2:
-      client:
-        provider:
-          oidc:
-            issuer-uri: http://localhost:9080/auth/realms/jhipster
-        registration:
-          oidc:
-            client-id: web_app
-            client-secret: web_app
 
 server:
   servlet:
@@ -163,11 +94,6 @@ jhipster:
     contact-email:
     license: unlicensed
     license-url:
-  security:
-    oauth2:
-      audience:
-        - account
-        - api://default
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

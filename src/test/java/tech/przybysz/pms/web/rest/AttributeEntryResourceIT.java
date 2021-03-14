@@ -1,7 +1,6 @@
 package tech.przybysz.pms.web.rest;
 
 import tech.przybysz.pms.ProductsServiceApp;
-import tech.przybysz.pms.config.TestSecurityConfiguration;
 import tech.przybysz.pms.domain.AttributeEntry;
 import tech.przybysz.pms.repository.AttributeEntryRepository;
 import tech.przybysz.pms.service.AttributeEntryService;
@@ -134,7 +133,7 @@ public class AttributeEntryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(attributeEntry.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
     }
-    
+
     @Test
     @Transactional
     public void getAttributeEntry() throws Exception {

@@ -15,14 +15,14 @@
                                  referencedTableName="brand"/>
 
         <addForeignKeyConstraint baseColumnNames="product_id"
-                                 baseTableName="product_categories"
-                                 constraintName="fk_product_categories_product_id"
+                                 baseTableName="product_category"
+                                 constraintName="fk_product_category_product_id"
                                  referencedColumnNames="id"
                                  referencedTableName="product"/>
 
-        <addForeignKeyConstraint baseColumnNames="categories_id"
-                                 baseTableName="product_categories"
-                                 constraintName="fk_product_categories_categories_id"
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="product_category"
+                                 constraintName="fk_product_category_category_id"
                                  referencedColumnNames="id"
                                  referencedTableName="category"/>
         
@@ -37,6 +37,18 @@
                                  constraintName="fk_product_attribute_entry_attribute_entry_id"
                                  referencedColumnNames="id"
                                  referencedTableName="attribute_entry"/>
+        
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="product_shop"
+                                 constraintName="fk_product_shop_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="shop_id"
+                                 baseTableName="product_shop"
+                                 constraintName="fk_product_shop_shop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shop"/>
         
     </changeSet>
 </databaseChangeLog>

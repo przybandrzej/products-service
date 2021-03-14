@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,14 +26,17 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "price", precision = 21, scale = 2)
+    private BigDecimal price;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "products", allowSetters = true)
     private Brand brand;
 
     @ManyToMany
-    @JoinTable(name = "product_categories",
+    @JoinTable(name = "product_category",
                joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
+               inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private Set<Category> categories = new HashSet<>();
 
     @ManyToMany
@@ -40,6 +44,12 @@ public class Product implements Serializable {
                joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "attribute_entry_id", referencedColumnName = "id"))
     private Set<AttributeEntry> attributeEntries = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "product_shop",
+               joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id"))
+    private Set<Shop> shops = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -61,6 +71,19 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Product price(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Brand getBrand() {
@@ -85,13 +108,13 @@ public class Product implements Serializable {
         return this;
     }
 
-    public Product addCategories(Category category) {
+    public Product addCategory(Category category) {
         this.categories.add(category);
         category.getProducts().add(this);
         return this;
     }
 
-    public Product removeCategories(Category category) {
+    public Product removeCategory(Category category) {
         this.categories.remove(category);
         category.getProducts().remove(this);
         return this;
@@ -125,6 +148,31 @@ public class Product implements Serializable {
     public void setAttributeEntries(Set<AttributeEntry> attributeEntries) {
         this.attributeEntries = attributeEntries;
     }
+
+    public Set<Shop> getShops() {
+        return shops;
+    }
+
+    public Product shops(Set<Shop> shops) {
+        this.shops = shops;
+        return this;
+    }
+
+    public Product addShop(Shop shop) {
+        this.shops.add(shop);
+        shop.getProducts().add(this);
+        return this;
+    }
+
+    public Product removeShop(Shop shop) {
+        this.shops.remove(shop);
+        shop.getProducts().remove(this);
+        return this;
+    }
+
+    public void setShops(Set<Shop> shops) {
+        this.shops = shops;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -149,6 +197,7 @@ public class Product implements Serializable {
         return "Product{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", price=" + getPrice() +
             "}";
     }
 }

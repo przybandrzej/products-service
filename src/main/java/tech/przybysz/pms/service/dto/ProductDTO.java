@@ -1,6 +1,7 @@
 package tech.przybysz.pms.service.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,10 +14,13 @@ public class ProductDTO implements Serializable {
 
     private String name;
 
+    private BigDecimal price;
+
 
     private Long brandId;
     private Set<CategoryDTO> categories = new HashSet<>();
     private Set<AttributeEntryDTO> attributeEntries = new HashSet<>();
+    private Set<ShopDTO> shops = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -32,6 +36,14 @@ public class ProductDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Long getBrandId() {
@@ -58,6 +70,14 @@ public class ProductDTO implements Serializable {
         this.attributeEntries = attributeEntries;
     }
 
+    public Set<ShopDTO> getShops() {
+        return shops;
+    }
+
+    public void setShops(Set<ShopDTO> shops) {
+        this.shops = shops;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -81,9 +101,11 @@ public class ProductDTO implements Serializable {
         return "ProductDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", price=" + getPrice() +
             ", brandId=" + getBrandId() +
             ", categories='" + getCategories() + "'" +
             ", attributeEntries='" + getAttributeEntries() + "'" +
+            ", shops='" + getShops() + "'" +
             "}";
     }
 }

@@ -18,6 +18,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="price" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
             <column name="brand_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -27,8 +30,8 @@
 
     <changeSet id="20210313111825-1-relations" author="jhipster">
 
-        <createTable tableName="product_categories">
-            <column name="categories_id" type="bigint">
+        <createTable tableName="product_category">
+            <column name="category_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="product_id" type="bigint">
@@ -36,7 +39,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="product_id, categories_id" tableName="product_categories"/>
+        <addPrimaryKey columnNames="product_id, category_id" tableName="product_category"/>
         
         <createTable tableName="product_attribute_entry">
             <column name="attribute_entry_id" type="bigint">
@@ -48,6 +51,17 @@
         </createTable>
 
         <addPrimaryKey columnNames="product_id, attribute_entry_id" tableName="product_attribute_entry"/>
+        
+        <createTable tableName="product_shop">
+            <column name="shop_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, shop_id" tableName="product_shop"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -67,6 +81,7 @@
                   tableName="product">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="price" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -24,12 +24,24 @@
       "otherEntityField": "id",
       "ownerSide": true,
       "otherEntityRelationshipName": "product"
+    },
+    {
+      "relationshipName": "shop",
+      "otherEntityName": "shop",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "product"
     }
   ],
   "fields": [
     {
       "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
     }
   ],
   "changelogDate": "20210313111825",

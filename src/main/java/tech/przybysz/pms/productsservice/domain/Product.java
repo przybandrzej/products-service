@@ -1,6 +1,8 @@
 package tech.przybysz.pms.productsservice.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,26 +27,43 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "subtitle")
+    private String subtitle;
+
     @Column(name = "price", precision = 21, scale = 2)
     private BigDecimal price;
 
     @ManyToOne
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties(value = "products", allowSetters = true)
+    private Currency currency;
+
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
     @JsonIgnoreProperties(value = "products", allowSetters = true)
     private Brand brand;
 
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
+    @JsonIgnoreProperties(value = "products", allowSetters = true)
+    private ImageUrl previewImage;
+
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "product_category",
                joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private Set<Category> categories = new HashSet<>();
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "product_attribute_entry",
                joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "attribute_entry_id", referencedColumnName = "id"))
     private Set<AttributeEntry> attributeEntries = new HashSet<>();
 
     @ManyToMany
+    @Fetch(FetchMode.JOIN)
     @JoinTable(name = "product_shop",
                joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id"))
@@ -172,6 +191,31 @@ public class Product implements Serializable {
     public void setShops(Set<Shop> shops) {
         this.shops = shops;
     }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public ImageUrl getPreviewImage() {
+        return previewImage;
+    }
+
+    public void setPreviewImage(ImageUrl previewImage) {
+        this.previewImage = previewImage;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

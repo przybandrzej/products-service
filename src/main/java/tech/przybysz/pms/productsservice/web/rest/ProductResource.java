@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.przybysz.pms.productsservice.service.ImageUrlService;
 import tech.przybysz.pms.productsservice.service.ProductService;
+import tech.przybysz.pms.productsservice.service.dto.ImageUrlDTO;
 import tech.przybysz.pms.productsservice.service.dto.ProductDTO;
 import tech.przybysz.pms.productsservice.web.rest.util.HeaderUtil;
 import tech.przybysz.pms.productsservice.web.rest.util.ResponseUtil;
@@ -20,6 +22,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ProductResource {
 
     private final Logger log = LoggerFactory.getLogger(ProductResource.class);
@@ -30,9 +33,11 @@ public class ProductResource {
     private String applicationName;
 
     private final ProductService productService;
+    private final ImageUrlService imageUrlService;
 
-    public ProductResource(ProductService productService) {
+    public ProductResource(ProductService productService, ImageUrlService imageUrlService) {
         this.productService = productService;
+        this.imageUrlService = imageUrlService;
     }
 
     /**
@@ -105,5 +110,11 @@ public class ProductResource {
         log.debug("REST request to delete Product : {}", id);
         productService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/products/{id}/images")
+    public List<ImageUrlDTO> getProductImages(@PathVariable Long id) {
+        log.debug("REST request to get images of Product : {}", id);
+        return imageUrlService.findAllOfProduct(id);
     }
 }

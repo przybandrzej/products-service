@@ -39,10 +39,13 @@ CREATE TABLE image_url
 
 CREATE TABLE product
 (
-    id       bigint NOT NULL,
-    name     character varying(255),
-    price    numeric(21, 2),
-    brand_id bigint
+    id               bigint NOT NULL,
+    name             character varying(255),
+    subtitle         character varying(255),
+    price            numeric(21, 2),
+    brand_id         bigint,
+    currency_id      bigint,
+    preview_image_id bigint
 );
 
 CREATE TABLE product_attribute_entry
@@ -76,6 +79,13 @@ CREATE TABLE shop
     name character varying(255)
 );
 
+CREATE TABLE currency
+(
+    id     bigint NOT NULL,
+    name   character varying(255),
+    symbol character varying(255)
+);
+
 SELECT pg_catalog.setval('sequence_generator', 1, false);
 ALTER TABLE ONLY attribute_entry
     ADD CONSTRAINT attribute_entry_pkey PRIMARY KEY (id);
@@ -97,6 +107,8 @@ ALTER TABLE ONLY product_shop
     ADD CONSTRAINT product_shop_pkey PRIMARY KEY (product_id, shop_id);
 ALTER TABLE ONLY shop
     ADD CONSTRAINT shop_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT currency_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY attribute
     ADD CONSTRAINT fk1eji3t1hu871hkq00mx58v7w3 FOREIGN KEY (category_id) REFERENCES category (id);
 ALTER TABLE ONLY product_category
@@ -117,3 +129,7 @@ ALTER TABLE ONLY attribute_entry
     ADD CONSTRAINT fkq687wssyepv5v9y1mpkg5t0p8 FOREIGN KEY (attribute_id) REFERENCES attribute (id);
 ALTER TABLE ONLY product
     ADD CONSTRAINT fks6cydsualtsrprvlf2bb3lcam FOREIGN KEY (brand_id) REFERENCES brand (id);
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_img_constr FOREIGN KEY (preview_image_id) REFERENCES image_url (id);
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_currency_constr FOREIGN KEY (currency_id) REFERENCES currency (id);

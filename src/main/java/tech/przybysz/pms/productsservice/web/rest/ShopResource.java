@@ -20,6 +20,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ShopResource {
 
     private final Logger log = LoggerFactory.getLogger(ShopResource.class);

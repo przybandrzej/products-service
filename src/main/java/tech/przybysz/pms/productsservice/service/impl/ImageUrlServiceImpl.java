@@ -64,4 +64,10 @@ public class ImageUrlServiceImpl implements ImageUrlService {
         log.debug("Request to delete ImageUrl : {}", id);
         imageUrlRepository.deleteById(id);
     }
+
+    @Override
+    public List<ImageUrlDTO> findAllOfProduct(Long productId) {
+        log.debug("Request to get ImageUrls of Product : {}", productId);
+        return imageUrlRepository.findAllByProductId(productId).stream().map(imageUrlMapper::toDto).collect(Collectors.toList());
+    }
 }

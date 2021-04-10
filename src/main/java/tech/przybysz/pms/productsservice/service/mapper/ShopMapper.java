@@ -3,7 +3,7 @@ package tech.przybysz.pms.productsservice.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import tech.przybysz.pms.productsservice.domain.*;
+import tech.przybysz.pms.productsservice.domain.Shop;
 import tech.przybysz.pms.productsservice.service.dto.ShopDTO;
 
 /**
@@ -12,17 +12,18 @@ import tech.przybysz.pms.productsservice.service.dto.ShopDTO;
 @Mapper(componentModel = "spring", uses = {})
 public interface ShopMapper extends EntityMapper<ShopDTO, Shop> {
 
+  ShopDTO toDto(Shop shop);
 
-    @Mapping(target = "products", ignore = true)
-    @Mapping(target = "removeProduct", ignore = true)
-    Shop toEntity(ShopDTO shopDTO);
+  @Mapping(target = "products", ignore = true)
+  @Mapping(target = "removeProduct", ignore = true)
+  Shop toEntity(ShopDTO shopDTO);
 
-    default Shop fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        Shop shop = new Shop();
-        shop.setId(id);
-        return shop;
+  default Shop fromId(Long id) {
+    if(id == null) {
+      return null;
     }
+    Shop shop = new Shop();
+    shop.setId(id);
+    return shop;
+  }
 }

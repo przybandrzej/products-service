@@ -37,4 +37,6 @@ public interface ImageUrlService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<ImageUrlDTO> findAllOfProduct(Long productId);
 }

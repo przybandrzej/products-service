@@ -11,16 +11,18 @@ import java.util.Set;
 public class ProductDTO implements Serializable {
     
     private Long id;
-
     private String name;
-
+    private String subtitle;
     private BigDecimal price;
-
-
+    private Long currencyId;
+    private String currencySymbol;
     private Long brandId;
+    private String brandName;
+    private Long previewImageId;
+    private String previewImageUrl;
     private Set<CategoryDTO> categories = new HashSet<>();
-    private Set<AttributeEntryDTO> attributeEntries = new HashSet<>();
     private Set<ShopDTO> shops = new HashSet<>();
+    private Set<AttributeEntryDTO> attributeEntries = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -62,20 +64,68 @@ public class ProductDTO implements Serializable {
         this.categories = categories;
     }
 
-    public Set<AttributeEntryDTO> getAttributeEntries() {
-        return attributeEntries;
-    }
-
-    public void setAttributeEntries(Set<AttributeEntryDTO> attributeEntries) {
-        this.attributeEntries = attributeEntries;
-    }
-
     public Set<ShopDTO> getShops() {
         return shops;
     }
 
     public void setShops(Set<ShopDTO> shops) {
         this.shops = shops;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    public Long getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(Long currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public String getCurrencySymbol() {
+        return currencySymbol;
+    }
+
+    public void setCurrencySymbol(String currencySymbol) {
+        this.currencySymbol = currencySymbol;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public Long getPreviewImageId() {
+        return previewImageId;
+    }
+
+    public void setPreviewImageId(Long previewImageId) {
+        this.previewImageId = previewImageId;
+    }
+
+    public String getPreviewImageUrl() {
+        return previewImageUrl;
+    }
+
+    public void setPreviewImageUrl(String previewImageUrl) {
+        this.previewImageUrl = previewImageUrl;
+    }
+
+    public Set<AttributeEntryDTO> getAttributeEntries() {
+        return attributeEntries;
+    }
+
+    public void setAttributeEntries(Set<AttributeEntryDTO> attributeEntries) {
+        this.attributeEntries = attributeEntries;
     }
 
     @Override
@@ -96,16 +146,23 @@ public class ProductDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
         return "ProductDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", price=" + getPrice() +
-            ", brandId=" + getBrandId() +
-            ", categories='" + getCategories() + "'" +
-            ", attributeEntries='" + getAttributeEntries() + "'" +
-            ", shops='" + getShops() + "'" +
-            "}";
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", subtitle='" + subtitle + '\'' +
+            ", price=" + price +
+            ", currencyId=" + currencyId +
+            ", currencySymbol='" + currencySymbol + '\'' +
+            ", brandId=" + brandId +
+            ", brandName='" + brandName + '\'' +
+            ", previewImageId=" + previewImageId +
+            ", previewImageUrl='" + previewImageUrl + '\'' +
+            ", categories=" + categories +
+            ", shops=" + shops +
+            ", attributeEntries=" + attributeEntries +
+            '}';
     }
 }

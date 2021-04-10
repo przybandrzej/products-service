@@ -37,7 +37,7 @@ spring:
     placeholders:
       currencies:
         pln:
-          name: Polski Złoty
+          name: Polish Złoty
           symbol: PLN
         euro:
           name: Euro
@@ -54,6 +54,7 @@ spring:
         aldi: Aldi
         kaufland: Kaufland
         ikea: Ikea
+
 
 logging:
   level:

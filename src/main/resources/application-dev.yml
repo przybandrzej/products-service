@@ -32,6 +32,28 @@ spring:
       thread-name-prefix: products-service-scheduling-
       pool:
         size: 2
+  flyway:
+    locations: classpath:db/migration/common,classpath:db/migration/dev
+    placeholders:
+      currencies:
+        pln:
+          name: Polski Złoty
+          symbol: PLN
+        euro:
+          name: Euro
+          symbol: €
+        dollar:
+          name: US Dollar
+          symbol: $
+      shops:
+        lidl: Lidl
+        intermarche: Intermarché
+        carrefour: Carrefour
+        auchan: Auchan
+        netto: Netto
+        aldi: Aldi
+        kaufland: Kaufland
+        ikea: Ikea
 
 logging:
   level:

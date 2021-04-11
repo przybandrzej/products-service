@@ -58,9 +58,15 @@ public class ProductServiceImpl implements ProductService {
     log.debug("Request to save Product : {}", productDTO);
     Product product = productMapper.toEntity(productDTO);
     product = productRepository.save(product);
-    product.setBrand(brandRepository.findById(product.getBrand().getId()).get());
-    product.setCurrency(currencyRepository.findById(product.getCurrency().getId()).get());
-    product.setPreviewImage(imageUrlRepository.findById(product.getPreviewImage().getId()).get());
+    if(product.getBrand() != null) {
+      product.setBrand(brandRepository.findById(product.getBrand().getId()).get());
+    }
+    if(product.getCurrency() != null) {
+      product.setCurrency(currencyRepository.findById(product.getCurrency().getId()).get());
+    }
+    if(product.getPreviewImage() != null) {
+      product.setPreviewImage(imageUrlRepository.findById(product.getPreviewImage().getId()).get());
+    }
     product.setCategories(new HashSet<>(categoryRepository.findAllById(
         product.getCategories().stream().map(Category::getId).collect(Collectors.toList()))));
     product.setShops(new HashSet<>(shopRepository.findAllById(

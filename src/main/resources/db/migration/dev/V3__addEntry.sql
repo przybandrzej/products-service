@@ -39,3 +39,5 @@ VALUES (1, 1);
 
 INSERT INTO product_attribute_entry (product_id, attribute_entry_id)
 VALUES (1, 2);
+
+SELECT pg_catalog.setval('sequence_generator', 100, false);

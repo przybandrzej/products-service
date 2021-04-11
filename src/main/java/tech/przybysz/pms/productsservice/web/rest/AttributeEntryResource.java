@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class AttributeEntryResource {
 
     private final Logger log = LoggerFactory.getLogger(AttributeEntryResource.class);

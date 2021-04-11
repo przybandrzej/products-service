@@ -30,6 +30,9 @@ public class Product implements Serializable {
     @Column(name = "subtitle")
     private String subtitle;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "price", precision = 21, scale = 2)
     private BigDecimal price;
 
@@ -214,6 +217,14 @@ public class Product implements Serializable {
 
     public void setPreviewImage(ImageUrl previewImage) {
         this.previewImage = previewImage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

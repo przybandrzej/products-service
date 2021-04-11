@@ -42,6 +42,7 @@ CREATE TABLE product
     id               bigint NOT NULL,
     name             character varying(255),
     subtitle         character varying(255),
+    description      character varying,
     price            numeric(21, 2),
     brand_id         bigint,
     currency_id      bigint,

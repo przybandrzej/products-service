@@ -13,6 +13,7 @@ public class ProductDTO implements Serializable {
     private Long id;
     private String name;
     private String subtitle;
+    private String description;
     private BigDecimal price;
     private Long currencyId;
     private String currencySymbol;
@@ -128,6 +129,14 @@ public class ProductDTO implements Serializable {
         this.attributeEntries = attributeEntries;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -146,13 +155,13 @@ public class ProductDTO implements Serializable {
     }
 
     // prettier-ignore
-
     @Override
     public String toString() {
         return "ProductDTO{" +
             "id=" + id +
             ", name='" + name + '\'' +
             ", subtitle='" + subtitle + '\'' +
+            ", description='" + description + '\'' +
             ", price=" + price +
             ", currencyId=" + currencyId +
             ", currencySymbol='" + currencySymbol + '\'' +

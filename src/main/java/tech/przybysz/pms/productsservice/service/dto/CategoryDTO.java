@@ -8,8 +8,8 @@ import java.io.Serializable;
 public class CategoryDTO implements Serializable {
     
     private Long id;
-
     private String name;
+    private Long parentCategoryId;
 
     
     public Long getId() {
@@ -26,6 +26,14 @@ public class CategoryDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getParentCategoryId() {
+        return parentCategoryId;
+    }
+
+    public void setParentCategoryId(Long parentCategoryId) {
+        this.parentCategoryId = parentCategoryId;
     }
 
     @Override
@@ -45,12 +53,12 @@ public class CategoryDTO implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "CategoryDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", parentCategoryId=" + parentCategoryId +
+            '}';
     }
 }

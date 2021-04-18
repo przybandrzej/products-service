@@ -8,11 +8,9 @@ import java.io.Serializable;
 public class AttributeEntryDTO implements Serializable {
     
     private Long id;
-
     private String value;
-
-
     private Long attributeId;
+    private Long productId;
     
     public Long getId() {
         return id;
@@ -38,6 +36,14 @@ public class AttributeEntryDTO implements Serializable {
         this.attributeId = attributeId;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -55,13 +61,13 @@ public class AttributeEntryDTO implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "AttributeEntryDTO{" +
-            "id=" + getId() +
-            ", value='" + getValue() + "'" +
-            ", attributeId=" + getAttributeId() +
-            "}";
+            "id=" + id +
+            ", value='" + value + '\'' +
+            ", attributeId=" + attributeId +
+            ", productId=" + productId +
+            '}';
     }
 }

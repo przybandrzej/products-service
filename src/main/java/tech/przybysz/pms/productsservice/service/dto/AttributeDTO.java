@@ -8,21 +8,9 @@ import java.io.Serializable;
 public class AttributeDTO implements Serializable {
     
     private Long id;
-
     private String name;
+    private Long attributeTypeId;
 
-    private Boolean isString;
-
-    private Boolean isLong;
-
-    private Boolean isDouble;
-
-    private Boolean isDate;
-
-    private Boolean isBoolean;
-
-
-    private Long categoryId;
     
     public Long getId() {
         return id;
@@ -40,52 +28,12 @@ public class AttributeDTO implements Serializable {
         this.name = name;
     }
 
-    public Boolean isIsString() {
-        return isString;
+    public Long getAttributeTypeId() {
+        return attributeTypeId;
     }
 
-    public void setIsString(Boolean isString) {
-        this.isString = isString;
-    }
-
-    public Boolean isIsLong() {
-        return isLong;
-    }
-
-    public void setIsLong(Boolean isLong) {
-        this.isLong = isLong;
-    }
-
-    public Boolean isIsDouble() {
-        return isDouble;
-    }
-
-    public void setIsDouble(Boolean isDouble) {
-        this.isDouble = isDouble;
-    }
-
-    public Boolean isIsDate() {
-        return isDate;
-    }
-
-    public void setIsDate(Boolean isDate) {
-        this.isDate = isDate;
-    }
-
-    public Boolean isIsBoolean() {
-        return isBoolean;
-    }
-
-    public void setIsBoolean(Boolean isBoolean) {
-        this.isBoolean = isBoolean;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setAttributeTypeId(Long attributeTypeId) {
+        this.attributeTypeId = attributeTypeId;
     }
 
     @Override
@@ -105,18 +53,12 @@ public class AttributeDTO implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "AttributeDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", isString='" + isIsString() + "'" +
-            ", isLong='" + isIsLong() + "'" +
-            ", isDouble='" + isIsDouble() + "'" +
-            ", isDate='" + isIsDate() + "'" +
-            ", isBoolean='" + isIsBoolean() + "'" +
-            ", categoryId=" + getCategoryId() +
-            "}";
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", attributeTypeId=" + attributeTypeId +
+            '}';
     }
 }

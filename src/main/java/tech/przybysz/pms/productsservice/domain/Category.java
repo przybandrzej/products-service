@@ -24,9 +24,14 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    @JsonIgnore
-    private Set<Product> products = new HashSet<>();
+    @ManyToOne
+    private Category parentCategory;
+
+    @ManyToMany
+    @JoinTable(name = "category_attribute",
+        joinColumns = @JoinColumn(name = "category_id"),
+        inverseJoinColumns = @JoinColumn(name = "attribute_type_id"))
+    private Set<Attribute> attributes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -50,30 +55,22 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<Attribute> getAttributes() {
+        return attributes;
     }
 
-    public Category products(Set<Product> products) {
-        this.products = products;
-        return this;
+    public void setAttributes(Set<Attribute> attributes) {
+        this.attributes = attributes;
     }
 
-    public Category addProduct(Product product) {
-        this.products.add(product);
-        product.getCategories().add(this);
-        return this;
+    public Category getParentCategory() {
+        return parentCategory;
     }
 
-    public Category removeProduct(Product product) {
-        this.products.remove(product);
-        product.getCategories().remove(this);
-        return this;
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

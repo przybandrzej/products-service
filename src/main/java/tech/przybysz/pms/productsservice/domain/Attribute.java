@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Attribute.
@@ -22,24 +24,12 @@ public class Attribute implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "is_string")
-    private Boolean isString;
-
-    @Column(name = "is_long")
-    private Boolean isLong;
-
-    @Column(name = "is_double")
-    private Boolean isDouble;
-
-    @Column(name = "is_date")
-    private Boolean isDate;
-
-    @Column(name = "is_boolean")
-    private Boolean isBoolean;
-
     @ManyToOne
     @JsonIgnoreProperties(value = "attributes", allowSetters = true)
-    private Category category;
+    private AttributeType attributeType;
+
+    @ManyToMany(mappedBy = "attributes")
+    private Set<Category> categories = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -63,84 +53,21 @@ public class Attribute implements Serializable {
         this.name = name;
     }
 
-    public Boolean isIsString() {
-        return isString;
+    public AttributeType getAttributeType() {
+        return attributeType;
     }
 
-    public Attribute isString(Boolean isString) {
-        this.isString = isString;
-        return this;
+    public void setAttributeType(AttributeType attributeType) {
+        this.attributeType = attributeType;
     }
 
-    public void setIsString(Boolean isString) {
-        this.isString = isString;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public Boolean isIsLong() {
-        return isLong;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
-
-    public Attribute isLong(Boolean isLong) {
-        this.isLong = isLong;
-        return this;
-    }
-
-    public void setIsLong(Boolean isLong) {
-        this.isLong = isLong;
-    }
-
-    public Boolean isIsDouble() {
-        return isDouble;
-    }
-
-    public Attribute isDouble(Boolean isDouble) {
-        this.isDouble = isDouble;
-        return this;
-    }
-
-    public void setIsDouble(Boolean isDouble) {
-        this.isDouble = isDouble;
-    }
-
-    public Boolean isIsDate() {
-        return isDate;
-    }
-
-    public Attribute isDate(Boolean isDate) {
-        this.isDate = isDate;
-        return this;
-    }
-
-    public void setIsDate(Boolean isDate) {
-        this.isDate = isDate;
-    }
-
-    public Boolean isIsBoolean() {
-        return isBoolean;
-    }
-
-    public Attribute isBoolean(Boolean isBoolean) {
-        this.isBoolean = isBoolean;
-        return this;
-    }
-
-    public void setIsBoolean(Boolean isBoolean) {
-        this.isBoolean = isBoolean;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public Attribute category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -164,11 +91,6 @@ public class Attribute implements Serializable {
         return "Attribute{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", isString='" + isIsString() + "'" +
-            ", isLong='" + isIsLong() + "'" +
-            ", isDouble='" + isIsDouble() + "'" +
-            ", isDate='" + isIsDate() + "'" +
-            ", isBoolean='" + isIsBoolean() + "'" +
             "}";
     }
 }

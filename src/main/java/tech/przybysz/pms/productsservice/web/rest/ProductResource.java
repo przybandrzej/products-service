@@ -9,6 +9,7 @@ import tech.przybysz.pms.productsservice.service.ImageUrlService;
 import tech.przybysz.pms.productsservice.service.ProductService;
 import tech.przybysz.pms.productsservice.service.dto.ImageUrlDTO;
 import tech.przybysz.pms.productsservice.service.dto.ProductDTO;
+import tech.przybysz.pms.productsservice.service.dto.fulldata.ProductFDTO;
 import tech.przybysz.pms.productsservice.web.rest.util.HeaderUtil;
 import tech.przybysz.pms.productsservice.web.rest.util.ResponseUtil;
 
@@ -116,5 +117,18 @@ public class ProductResource {
     public List<ImageUrlDTO> getProductImages(@PathVariable Long id) {
         log.debug("REST request to get images of Product : {}", id);
         return imageUrlService.findAllOfProduct(id);
+    }
+
+    /**
+     * {@code GET  /products/:id} : get the "id" product.
+     *
+     * @param id the id of the productDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/products/{id}/full-info")
+    public ResponseEntity<ProductFDTO> getProductFullInfo(@PathVariable Long id) {
+        log.debug("REST request to get Product : {}", id);
+        Optional<ProductFDTO> productDTO = productService.findOneWithFullInfo(id);
+        return ResponseUtil.wrapOrNotFound(productDTO);
     }
 }

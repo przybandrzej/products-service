@@ -13,6 +13,8 @@ import tech.przybysz.pms.productsservice.domain.Shop;
 import tech.przybysz.pms.productsservice.repository.*;
 import tech.przybysz.pms.productsservice.service.ProductService;
 import tech.przybysz.pms.productsservice.service.dto.ProductDTO;
+import tech.przybysz.pms.productsservice.service.dto.fulldata.ProductFDTO;
+import tech.przybysz.pms.productsservice.service.exception.EntityNotFoundException;
 import tech.przybysz.pms.productsservice.service.mapper.ProductMapper;
 
 import java.util.HashSet;
@@ -53,12 +55,13 @@ public class ProductServiceImpl implements ProductService {
     this.attributeEntryRepository = attributeEntryRepository;
   }
 
+  @SuppressWarnings({"java:S3655"})
   @Override
   public ProductDTO save(ProductDTO productDTO) {
     log.debug("Request to save Product : {}", productDTO);
     Product product = productMapper.toEntity(productDTO);
     product = productRepository.save(product);
-    if(product.getBrand() != null) {
+    /*if(product.getBrand() != null) {
       product.setBrand(brandRepository.findById(product.getBrand().getId()).get());
     }
     if(product.getCurrency() != null) {
@@ -67,12 +70,8 @@ public class ProductServiceImpl implements ProductService {
     if(product.getPreviewImage() != null) {
       product.setPreviewImage(imageUrlRepository.findById(product.getPreviewImage().getId()).get());
     }
-    product.setCategories(new HashSet<>(categoryRepository.findAllById(
-        product.getCategories().stream().map(Category::getId).collect(Collectors.toList()))));
-    product.setShops(new HashSet<>(shopRepository.findAllById(
-        product.getShops().stream().map(Shop::getId).collect(Collectors.toList()))));
-    product.setAttributeEntries(new HashSet<>(attributeEntryRepository.findAllById(
-        product.getAttributeEntries().stream().map(AttributeEntry::getId).collect(Collectors.toList()))));
+    product.setCategory(categoryRepository.findById(product.getCategory().getId()).get());*/
+    product = productRepository.findOneWithEagerRelationships(product.getId()).orElseThrow(() -> new EntityNotFoundException("product"));
     return productMapper.toDto(product);
   }
 
@@ -102,5 +101,11 @@ public class ProductServiceImpl implements ProductService {
   public void delete(Long id) {
     log.debug("Request to delete Product : {}", id);
     productRepository.deleteById(id);
+  }
+
+  @Override
+  public Optional<ProductFDTO> findOneWithFullInfo(Long id) {
+    log.debug("Request to find Product : {} with full info", id);
+    return productRepository.findOneWithEagerRelationships(id).map(productMapper::toFDto);
   }
 }

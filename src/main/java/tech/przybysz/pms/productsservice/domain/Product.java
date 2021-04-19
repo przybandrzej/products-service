@@ -37,7 +37,6 @@ public class Product implements Serializable {
   private BigDecimal price;
 
   @ManyToOne
-  @Fetch(FetchMode.JOIN)
   @JsonIgnoreProperties(value = "products", allowSetters = true)
   private Currency currency;
 
@@ -47,20 +46,16 @@ public class Product implements Serializable {
   private Brand brand;
 
   @ManyToOne
-  @Fetch(FetchMode.JOIN)
   @JsonIgnoreProperties(value = "products", allowSetters = true)
   private ImageUrl previewImage;
 
   @ManyToOne
-  @Fetch(FetchMode.JOIN)
   private Category category;
 
-  @OneToMany
-  @Fetch(FetchMode.JOIN)
+  @OneToMany(mappedBy = "product")
   private Set<AttributeEntry> attributeEntries = new HashSet<>();
 
   @ManyToMany
-  @Fetch(FetchMode.JOIN)
   @JoinTable(name = "product_shop",
       joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id"))

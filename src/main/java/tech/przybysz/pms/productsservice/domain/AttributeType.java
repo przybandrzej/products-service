@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "unit")
+@Table(name = "attribute_type")
 public class AttributeType implements Serializable {
 
   private static final long serialVersionUID = 1L;

@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     log.debug("Request to save Product : {}", productDTO);
     Product product = productMapper.toEntity(productDTO);
     product = productRepository.save(product);
-    /*if(product.getBrand() != null) {
+    if(product.getBrand() != null) {
       product.setBrand(brandRepository.findById(product.getBrand().getId()).get());
     }
     if(product.getCurrency() != null) {
@@ -70,7 +70,9 @@ public class ProductServiceImpl implements ProductService {
     if(product.getPreviewImage() != null) {
       product.setPreviewImage(imageUrlRepository.findById(product.getPreviewImage().getId()).get());
     }
-    product.setCategory(categoryRepository.findById(product.getCategory().getId()).get());*/
+    if(product.getCategory() != null) {
+      product.setCategory(categoryRepository.findById(product.getCategory().getId()).get());
+    }
     product = productRepository.findOneWithEagerRelationships(product.getId()).orElseThrow(() -> new EntityNotFoundException("product"));
     return productMapper.toDto(product);
   }
@@ -107,5 +109,14 @@ public class ProductServiceImpl implements ProductService {
   public Optional<ProductFDTO> findOneWithFullInfo(Long id) {
     log.debug("Request to find Product : {} with full info", id);
     return productRepository.findOneWithEagerRelationships(id).map(productMapper::toFDto);
+  }
+
+  @Override
+  public void addShops(Long productId, List<Long> shopIds) {
+    log.debug("Request to add Shops : {} to Product : {}", shopIds, productId);
+    List<Shop> allById = shopRepository.findAllById(shopIds);
+    Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("product"));
+    allById.forEach(product::addShop);
+    productRepository.save(product);
   }
 }

@@ -1,6 +1,7 @@
 package tech.przybysz.pms.productsservice.service;
 
 import tech.przybysz.pms.productsservice.service.dto.CategoryDTO;
+import tech.przybysz.pms.productsservice.service.dto.fulldata.CategoryFDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,4 +38,7 @@ public interface CategoryService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+
+    Optional<CategoryFDTO> findOneWithFullInfo(Long id);
 }

@@ -8,6 +8,7 @@ import tech.przybysz.pms.productsservice.domain.Category;
 import tech.przybysz.pms.productsservice.repository.CategoryRepository;
 import tech.przybysz.pms.productsservice.service.CategoryService;
 import tech.przybysz.pms.productsservice.service.dto.CategoryDTO;
+import tech.przybysz.pms.productsservice.service.dto.fulldata.CategoryFDTO;
 import tech.przybysz.pms.productsservice.service.mapper.CategoryMapper;
 
 import java.util.LinkedList;
@@ -63,5 +64,10 @@ public class CategoryServiceImpl implements CategoryService {
     public void delete(Long id) {
         log.debug("Request to delete Category : {}", id);
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<CategoryFDTO> findOneWithFullInfo(Long id) {
+        return categoryRepository.findById(id).map(categoryMapper::toFDto);
     }
 }

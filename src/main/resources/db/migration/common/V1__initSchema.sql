@@ -9,7 +9,8 @@ CREATE TABLE attribute_entry
     id           bigint NOT NULL,
     value        character varying(255),
     attribute_id bigint,
-    product_id   bigint
+    product_id   bigint,
+    unit_id      bigint
 );
 CREATE TABLE attribute_type_unit
 (
@@ -30,7 +31,7 @@ CREATE TABLE category
 CREATE TABLE category_attribute
 (
     category_id       bigint NOT NULL,
-    attribute_type_id bigint NOT NULL
+    attribute_id bigint NOT NULL
 );
 CREATE TABLE currency
 (
@@ -104,7 +105,7 @@ ALTER TABLE ONLY brand
     ADD CONSTRAINT brand_pkey PRIMARY KEY (id);
 
 ALTER TABLE ONLY category_attribute
-    ADD CONSTRAINT category_attribute_pkey PRIMARY KEY (category_id, attribute_type_id);
+    ADD CONSTRAINT category_attribute_pkey PRIMARY KEY (category_id, attribute_id);
 
 ALTER TABLE ONLY category
     ADD CONSTRAINT category_pkey PRIMARY KEY (id);
@@ -142,6 +143,9 @@ ALTER TABLE ONLY attribute_type_unit
 ALTER TABLE ONLY attribute_entry
     ADD CONSTRAINT fkb5o887horbpxxy5ltt6cqy15 FOREIGN KEY (product_id) REFERENCES product (id);
 
+ALTER TABLE ONLY attribute_entry
+    ADD CONSTRAINT fkb5o887horbpxxy5ltt6cqy12 FOREIGN KEY (unit_id) REFERENCES unit (id);
+
 ALTER TABLE ONLY category_attribute
     ADD CONSTRAINT fke0pcstwj0x32r32yy4e8impwv FOREIGN KEY (category_id) REFERENCES category (id);
 
@@ -158,7 +162,7 @@ ALTER TABLE ONLY product
     ADD CONSTRAINT fkjs3qd4l0ebv5a0jfo7v59imbn FOREIGN KEY (currency_id) REFERENCES currency (id);
 
 ALTER TABLE ONLY category_attribute
-    ADD CONSTRAINT fkm7g4unkarkf07qegkd63bksw7 FOREIGN KEY (attribute_type_id) REFERENCES attribute (id);
+    ADD CONSTRAINT fkm7g4unkarkf07qegkd63bksw7 FOREIGN KEY (attribute_id) REFERENCES attribute (id);
 
 ALTER TABLE ONLY attribute_type_unit
     ADD CONSTRAINT fkppbwh2ooi07tppw6hf06kiv51 FOREIGN KEY (unit_id) REFERENCES unit (id);

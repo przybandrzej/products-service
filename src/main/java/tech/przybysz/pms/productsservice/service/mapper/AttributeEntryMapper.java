@@ -10,7 +10,7 @@ import tech.przybysz.pms.productsservice.service.dto.fulldata.AttributeEntryFDTO
 /**
  * Mapper for the entity {@link AttributeEntry} and its DTO {@link AttributeEntryDTO}.
  */
-@Mapper(componentModel = "spring", uses = {AttributeMapper.class, ProductMapper.class})
+@Mapper(componentModel = "spring", uses = {AttributeMapper.class, ProductMapper.class, UnitMapper.class})
 public interface AttributeEntryMapper extends EntityMapper<AttributeEntryDTO, AttributeEntry> {
 
   @Mapping(source = "product.id", target = "productId")

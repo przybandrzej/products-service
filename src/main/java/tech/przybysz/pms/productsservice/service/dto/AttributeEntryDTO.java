@@ -11,6 +11,7 @@ public class AttributeEntryDTO implements Serializable {
     private String value;
     private Long attributeId;
     private Long productId;
+    private UnitDTO unit;
     
     public Long getId() {
         return id;
@@ -44,6 +45,14 @@ public class AttributeEntryDTO implements Serializable {
         this.productId = productId;
     }
 
+    public UnitDTO getUnit() {
+        return unit;
+    }
+
+    public void setUnit(UnitDTO unit) {
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,6 +77,7 @@ public class AttributeEntryDTO implements Serializable {
             ", value='" + value + '\'' +
             ", attributeId=" + attributeId +
             ", productId=" + productId +
+            ", unit=" + unit +
             '}';
     }
 }

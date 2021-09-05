@@ -1,7 +1,5 @@
 package tech.przybysz.pms.productsservice.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,7 +28,7 @@ public class Category implements Serializable {
     @ManyToMany
     @JoinTable(name = "category_attribute",
         joinColumns = @JoinColumn(name = "category_id"),
-        inverseJoinColumns = @JoinColumn(name = "attribute_type_id"))
+        inverseJoinColumns = @JoinColumn(name = "attribute_id"))
     private Set<Attribute> attributes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -1,11 +1,14 @@
 package tech.przybysz.pms.productsservice.service.dto.fulldata;
 
+import tech.przybysz.pms.productsservice.service.dto.UnitDTO;
+
 public class AttributeEntryFDTO {
 
   private Long id;
   private String value;
   private Long productId;
   private AttributeFDTO attribute;
+  private UnitDTO unit;
 
   public Long getId() {
     return id;
@@ -39,6 +42,14 @@ public class AttributeEntryFDTO {
     this.attribute = attribute;
   }
 
+  public UnitDTO getUnit() {
+    return unit;
+  }
+
+  public void setUnit(UnitDTO unit) {
+    this.unit = unit;
+  }
+
   @Override
   public String toString() {
     return "AttributeEntryFDTO{" +
@@ -46,6 +57,7 @@ public class AttributeEntryFDTO {
         ", value='" + value + '\'' +
         ", productId=" + productId +
         ", attribute=" + attribute +
+        ", unit=" + unit +
         '}';
   }
 }

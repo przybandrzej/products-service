@@ -23,6 +23,10 @@ public class AttributeEntry implements Serializable {
   private String value;
 
   @ManyToOne
+  @JsonIgnoreProperties(value = "attributes", allowSetters = true)
+  private Unit unit;
+
+  @ManyToOne
   @JsonIgnoreProperties(value = "attributeEntries", allowSetters = true)
   private Attribute attribute;
 
@@ -70,6 +74,14 @@ public class AttributeEntry implements Serializable {
 
   public void setProduct(Product product) {
     this.product = product;
+  }
+
+  public Unit getUnit() {
+    return unit;
+  }
+
+  public void setUnit(Unit unit) {
+    this.unit = unit;
   }
 
   // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -1,7 +1,5 @@
 package tech.przybysz.pms.productsservice.service.dto;
 
-import javax.persistence.Column;
-
 public class UnitDTO {
 
   private Long id;

@@ -2,6 +2,7 @@ package tech.przybysz.pms.productsservice.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -100,7 +101,7 @@ public class ProductServiceImpl implements ProductService {
       return productRepository.findAll(pageReq).stream().map(productMapper::toDto).collect(Collectors.toList());
     }
     String q = searchTerm.toLowerCase();
-    Collection<Product> searchResult = productRepository.findAllByNameContainingIgnoreCaseOrSubtitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrBrandNameContainingIgnoreCaseOrCategoryNameContainingIgnoreCase(q, q, q, q, q, pageReq);
+    Page<Product> searchResult = productRepository.findAllByNameContainingIgnoreCaseOrSubtitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrBrandNameContainingIgnoreCaseOrCategoryNameContainingIgnoreCase(q, q, q, q, q, pageReq);
     return searchResult.stream().map(productMapper::toDto).collect(Collectors.toList());
   }
 }

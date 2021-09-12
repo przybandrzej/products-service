@@ -41,13 +41,6 @@ public class ProductResource {
     this.imageUrlService = imageUrlService;
   }
 
-  /**
-   * {@code POST  /products} : Create a new product.
-   *
-   * @param productDTO the productDTO to create.
-   * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new productDTO, or with status {@code 400 (Bad Request)} if the product has already an ID.
-   * @throws URISyntaxException if the Location URI syntax is incorrect.
-   */
   @PostMapping("/products")
   public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) throws URISyntaxException {
     log.debug("REST request to save Product : {}", productDTO);
@@ -57,17 +50,8 @@ public class ProductResource {
         .body(result);
   }
 
-  /**
-   * {@code PUT  /products} : Updates an existing product.
-   *
-   * @param productDTO the productDTO to update.
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productDTO,
-   * or with status {@code 400 (Bad Request)} if the productDTO is not valid,
-   * or with status {@code 500 (Internal Server Error)} if the productDTO couldn't be updated.
-   * @throws URISyntaxException if the Location URI syntax is incorrect.
-   */
   @PutMapping("/products")
-  public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) throws URISyntaxException {
+  public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO) {
     log.debug("REST request to update Product : {}", productDTO);
     ProductDTO result = productService.save(productDTO);
     return ResponseEntity.ok()
@@ -75,24 +59,14 @@ public class ProductResource {
         .body(result);
   }
 
-  /**
-   * {@code GET  /products} : get all the products.
-   *
-   * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
-   */
   @GetMapping("/products")
-  public List<ProductDTO> getAllProducts(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-    log.debug("REST request to get all Products");
-    return productService.findAll();
+  public List<ProductDTO> searchProducts(@RequestParam(required = false) String q,
+                                         @RequestParam(required = false, defaultValue = "10") int size,
+                                         @RequestParam(required = false, defaultValue = "0") int page) {
+    log.debug("REST request to search Products : {} [{}]", q, size);
+    return productService.find(q, size, page);
   }
 
-  /**
-   * {@code GET  /products/:id} : get the "id" product.
-   *
-   * @param id the id of the productDTO to retrieve.
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
-   */
   @GetMapping("/products/{id}")
   public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
     log.debug("REST request to get Product : {}", id);
@@ -100,12 +74,6 @@ public class ProductResource {
     return ResponseUtil.wrapOrNotFound(productDTO);
   }
 
-  /**
-   * {@code DELETE  /products/:id} : delete the "id" product.
-   *
-   * @param id the id of the productDTO to delete.
-   * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-   */
   @DeleteMapping("/products/{id}")
   public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
     log.debug("REST request to delete Product : {}", id);
@@ -119,12 +87,6 @@ public class ProductResource {
     return imageUrlService.findAllOfProduct(id);
   }
 
-  /**
-   * {@code GET  /products/:id} : get the "id" product.
-   *
-   * @param id the id of the productDTO to retrieve.
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
-   */
   @GetMapping("/products/{id}/full-info")
   public ResponseEntity<ProductFDTO> getProductFullInfo(@PathVariable Long id) {
     log.debug("REST request to get Product : {}", id);
@@ -132,12 +94,12 @@ public class ProductResource {
     return ResponseUtil.wrapOrNotFound(productDTO);
   }
 
-  @PostMapping("/products/{id}/shops")
-  public ResponseEntity<Void> addShopsToProduct(@PathVariable Long id, @RequestBody List<Long> shopIds) {
-    log.debug("REST request to add Shops to Product : {} : {}", id, shopIds);
-    productService.addShops(id, shopIds);
-    return ResponseEntity.noContent()
-        .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
-        .build();
-  }
+//  @PostMapping("/products/{id}/shops")
+//  public ResponseEntity<Void> addShopsToProduct(@PathVariable Long id, @RequestBody List<Long> shopIds) {
+//    log.debug("REST request to add Shops to Product : {} : {}", id, shopIds);
+//    productService.addShops(id, shopIds);
+//    return ResponseEntity.noContent()
+//        .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
+//        .build();
+//  }
 }

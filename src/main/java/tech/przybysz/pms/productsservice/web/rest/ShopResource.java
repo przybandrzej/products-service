@@ -36,13 +36,6 @@ public class ShopResource {
         this.shopService = shopService;
     }
 
-    /**
-     * {@code POST  /shops} : Create a new shop.
-     *
-     * @param shopDTO the shopDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new shopDTO, or with status {@code 400 (Bad Request)} if the shop has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("/shops")
     public ResponseEntity<ShopDTO> createShop(@RequestBody ShopDTO shopDTO) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shopDTO);
@@ -52,17 +45,8 @@ public class ShopResource {
             .body(result);
     }
 
-    /**
-     * {@code PUT  /shops} : Updates an existing shop.
-     *
-     * @param shopDTO the shopDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated shopDTO,
-     * or with status {@code 400 (Bad Request)} if the shopDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the shopDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/shops")
-    public ResponseEntity<ShopDTO> updateShop(@RequestBody ShopDTO shopDTO) throws URISyntaxException {
+    public ResponseEntity<ShopDTO> updateShop(@RequestBody ShopDTO shopDTO) {
         log.debug("REST request to update Shop : {}", shopDTO);
         ShopDTO result = shopService.save(shopDTO);
         return ResponseEntity.ok()
@@ -70,23 +54,14 @@ public class ShopResource {
             .body(result);
     }
 
-    /**
-     * {@code GET  /shops} : get all the shops.
-     *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of shops in body.
-     */
     @GetMapping("/shops")
-    public List<ShopDTO> getAllShops() {
+    public List<ShopDTO> searchShops(@RequestParam(required = false) String q,
+                                     @RequestParam(required = false, defaultValue = "10") int size,
+                                     @RequestParam(required = false, defaultValue = "0") int page) {
         log.debug("REST request to get all Shops");
-        return shopService.findAll();
+        return shopService.search(q, size, page);
     }
 
-    /**
-     * {@code GET  /shops/:id} : get the "id" shop.
-     *
-     * @param id the id of the shopDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the shopDTO, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/shops/{id}")
     public ResponseEntity<ShopDTO> getShop(@PathVariable Long id) {
         log.debug("REST request to get Shop : {}", id);
@@ -94,12 +69,6 @@ public class ShopResource {
         return ResponseUtil.wrapOrNotFound(shopDTO);
     }
 
-    /**
-     * {@code DELETE  /shops/:id} : delete the "id" shop.
-     *
-     * @param id the id of the shopDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/shops/{id}")
     public ResponseEntity<Void> deleteShop(@PathVariable Long id) {
         log.debug("REST request to delete Shop : {}", id);

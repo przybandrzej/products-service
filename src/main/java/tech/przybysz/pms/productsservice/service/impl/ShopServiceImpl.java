@@ -2,6 +2,8 @@ package tech.przybysz.pms.productsservice.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.przybysz.pms.productsservice.domain.Shop;
@@ -43,16 +45,6 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ShopDTO> findAll() {
-        log.debug("Request to get all Shops");
-        return shopRepository.findAll().stream()
-            .map(shopMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
     public Optional<ShopDTO> findOne(Long id) {
         log.debug("Request to get Shop : {}", id);
         return shopRepository.findById(id)
@@ -63,5 +55,15 @@ public class ShopServiceImpl implements ShopService {
     public void delete(Long id) {
         log.debug("Request to delete Shop : {}", id);
         shopRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ShopDTO> search(@Nullable String searchTerm, int size, int page) {
+        var pageReq = PageRequest.of(page, size);
+        if(searchTerm == null) {
+            return shopRepository.findAll(pageReq).stream().map(shopMapper::toDto).collect(Collectors.toList());
+        }
+        String q = searchTerm.toLowerCase();
+        return shopRepository.findAllByNameContainingIgnoreCase(q, pageReq).stream().map(shopMapper::toDto).collect(Collectors.toList());
     }
 }

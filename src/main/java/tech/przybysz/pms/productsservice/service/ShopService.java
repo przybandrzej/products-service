@@ -1,5 +1,6 @@
 package tech.przybysz.pms.productsservice.service;
 
+import org.springframework.lang.Nullable;
 import tech.przybysz.pms.productsservice.service.dto.ShopDTO;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ShopService {
      *
      * @return the list of entities.
      */
-    List<ShopDTO> findAll();
+    List<ShopDTO> search(@Nullable String searchTerm, int size, int page);
 
 
     /**

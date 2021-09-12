@@ -33,12 +33,9 @@ public class Product implements Serializable {
   private String description;
 
   @ManyToOne
-  @Fetch(FetchMode.JOIN)
-  @JsonIgnoreProperties(value = "products", allowSetters = true)
   private Brand brand;
 
   @ManyToOne
-  @JsonIgnoreProperties(value = "products", allowSetters = true)
   private ImageUrl previewImage;
 
   @ManyToOne

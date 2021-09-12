@@ -2,7 +2,6 @@ package tech.przybysz.pms.productsservice.service.mapper;
 
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import tech.przybysz.pms.productsservice.domain.Shop;
 import tech.przybysz.pms.productsservice.service.dto.ShopDTO;
 
@@ -14,8 +13,6 @@ public interface ShopMapper extends EntityMapper<ShopDTO, Shop> {
 
   ShopDTO toDto(Shop shop);
 
-  @Mapping(target = "products", ignore = true)
-  @Mapping(target = "removeProduct", ignore = true)
   Shop toEntity(ShopDTO shopDTO);
 
   default Shop fromId(Long id) {

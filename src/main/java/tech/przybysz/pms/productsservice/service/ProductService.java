@@ -30,7 +30,7 @@ public interface ProductService {
    *
    * @return the list of entities.
    */
-  Page<ProductDTO> findAllWithEagerRelationships(Pageable pageable);
+//  Page<ProductDTO> findAllWithEagerRelationships(Pageable pageable);
 
 
   /**

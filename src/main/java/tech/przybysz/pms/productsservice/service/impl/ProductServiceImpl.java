@@ -17,10 +17,7 @@ import tech.przybysz.pms.productsservice.service.dto.fulldata.ProductFDTO;
 import tech.przybysz.pms.productsservice.service.exception.EntityNotFoundException;
 import tech.przybysz.pms.productsservice.service.mapper.ProductMapper;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -64,16 +61,16 @@ public class ProductServiceImpl implements ProductService {
     if(product.getBrand() != null) {
       product.setBrand(brandRepository.findById(product.getBrand().getId()).get());
     }
-    if(product.getCurrency() != null) {
-      product.setCurrency(currencyRepository.findById(product.getCurrency().getId()).get());
-    }
+//    if(product.getCurrency() != null) {
+//      product.setCurrency(currencyRepository.findById(product.getCurrency().getId()).get());
+//    }
     if(product.getPreviewImage() != null) {
       product.setPreviewImage(imageUrlRepository.findById(product.getPreviewImage().getId()).get());
     }
     if(product.getCategory() != null) {
       product.setCategory(categoryRepository.findById(product.getCategory().getId()).get());
     }
-    product = productRepository.findOneWithEagerRelationships(product.getId()).orElseThrow(() -> new EntityNotFoundException("product"));
+//    product = productRepository.findOneWithEagerRelationships(product.getId()).orElseThrow(() -> new EntityNotFoundException("product"));
     return productMapper.toDto(product);
   }
 
@@ -81,22 +78,19 @@ public class ProductServiceImpl implements ProductService {
   @Transactional(readOnly = true)
   public List<ProductDTO> findAll() {
     log.debug("Request to get all Products");
-    return productRepository.findAllWithEagerRelationships().stream()
-        .map(productMapper::toDto)
-        .collect(Collectors.toCollection(LinkedList::new));
-  }
-
-
-  public Page<ProductDTO> findAllWithEagerRelationships(Pageable pageable) {
-    return productRepository.findAllWithEagerRelationships(pageable).map(productMapper::toDto);
+//    return productRepository.findAllWithEagerRelationships().stream()
+//        .map(productMapper::toDto)
+//        .collect(Collectors.toCollection(LinkedList::new));
+    return new ArrayList<>();
   }
 
   @Override
   @Transactional(readOnly = true)
   public Optional<ProductDTO> findOne(Long id) {
     log.debug("Request to get Product : {}", id);
-    return productRepository.findOneWithEagerRelationships(id)
-        .map(productMapper::toDto);
+//    return productRepository.findOneWithEagerRelationships(id)
+//        .map(productMapper::toDto);
+    return Optional.empty();
   }
 
   @Override
@@ -108,7 +102,8 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public Optional<ProductFDTO> findOneWithFullInfo(Long id) {
     log.debug("Request to find Product : {} with full info", id);
-    return productRepository.findOneWithEagerRelationships(id).map(productMapper::toFDto);
+//    return productRepository.findOneWithEagerRelationships(id).map(productMapper::toFDto);
+    return Optional.empty();
   }
 
   @Override
@@ -116,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
     log.debug("Request to add Shops : {} to Product : {}", shopIds, productId);
     List<Shop> allById = shopRepository.findAllById(shopIds);
     Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("product"));
-    allById.forEach(product::addShop);
+//    allById.forEach(product::addShop);
     productRepository.save(product);
   }
 }

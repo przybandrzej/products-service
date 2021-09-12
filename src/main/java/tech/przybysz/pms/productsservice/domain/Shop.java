@@ -24,10 +24,6 @@ public class Shop implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "shops")
-    @JsonIgnore
-    private Set<Product> products = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -50,30 +46,6 @@ public class Shop implements Serializable {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public Shop products(Set<Product> products) {
-        this.products = products;
-        return this;
-    }
-
-    public Shop addProduct(Product product) {
-        this.products.add(product);
-        product.getShops().add(this);
-        return this;
-    }
-
-    public Shop removeProduct(Product product) {
-        this.products.remove(product);
-        product.getShops().remove(this);
-        return this;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

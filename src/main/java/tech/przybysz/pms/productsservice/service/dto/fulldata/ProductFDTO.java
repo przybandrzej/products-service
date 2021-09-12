@@ -1,8 +1,5 @@
 package tech.przybysz.pms.productsservice.service.dto.fulldata;
 
-import tech.przybysz.pms.productsservice.service.dto.ShopDTO;
-
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,16 +9,13 @@ public class ProductFDTO {
   private String name;
   private String subtitle;
   private String description;
-  private BigDecimal price;
-  private Long currencyId;
-  private String currencySymbol;
   private Long brandId;
   private String brandName;
   private Long previewImageId;
   private String previewImageUrl;
   private Long categoryId;
   private String categoryName;
-  private Set<ShopDTO> shops = new HashSet<>();
+  private Set<ProductShopFDTO> shops = new HashSet<>();
   private Set<AttributeEntryFDTO> attributeEntries = new HashSet<>();
 
   public Long getId() {
@@ -54,30 +48,6 @@ public class ProductFDTO {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
-
-  public Long getCurrencyId() {
-    return currencyId;
-  }
-
-  public void setCurrencyId(Long currencyId) {
-    this.currencyId = currencyId;
-  }
-
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  public void setCurrencySymbol(String currencySymbol) {
-    this.currencySymbol = currencySymbol;
   }
 
   public Long getBrandId() {
@@ -128,11 +98,11 @@ public class ProductFDTO {
     this.categoryName = categoryName;
   }
 
-  public Set<ShopDTO> getShops() {
+  public Set<ProductShopFDTO> getShops() {
     return shops;
   }
 
-  public void setShops(Set<ShopDTO> shops) {
+  public void setShops(Set<ProductShopFDTO> shops) {
     this.shops = shops;
   }
 
@@ -151,9 +121,6 @@ public class ProductFDTO {
         ", name='" + name + '\'' +
         ", subtitle='" + subtitle + '\'' +
         ", description='" + description + '\'' +
-        ", price=" + price +
-        ", currencyId=" + currencyId +
-        ", currencySymbol='" + currencySymbol + '\'' +
         ", brandId=" + brandId +
         ", brandName='" + brandName + '\'' +
         ", previewImageId=" + previewImageId +

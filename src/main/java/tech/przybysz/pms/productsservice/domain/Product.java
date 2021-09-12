@@ -6,7 +6,6 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,13 +32,6 @@ public class Product implements Serializable {
   @Column(name = "description")
   private String description;
 
-  @Column(name = "price", precision = 21, scale = 2)
-  private BigDecimal price;
-
-  @ManyToOne
-  @JsonIgnoreProperties(value = "products", allowSetters = true)
-  private Currency currency;
-
   @ManyToOne
   @Fetch(FetchMode.JOIN)
   @JsonIgnoreProperties(value = "products", allowSetters = true)
@@ -54,12 +46,6 @@ public class Product implements Serializable {
 
   @OneToMany(mappedBy = "product")
   private Set<AttributeEntry> attributeEntries = new HashSet<>();
-
-  @ManyToMany
-  @JoinTable(name = "product_shop",
-      joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-      inverseJoinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id"))
-  private Set<Shop> shops = new HashSet<>();
 
   // jhipster-needle-entity-add-field - JHipster will add fields here
   public Long getId() {
@@ -81,19 +67,6 @@ public class Product implements Serializable {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public Product price(BigDecimal price) {
-    this.price = price;
-    return this;
-  }
-
-  public void setPrice(BigDecimal price) {
-    this.price = price;
   }
 
   public Brand getBrand() {
@@ -125,31 +98,6 @@ public class Product implements Serializable {
     this.attributeEntries = attributeEntries;
   }
 
-  public Set<Shop> getShops() {
-    return shops;
-  }
-
-  public Product shops(Set<Shop> shops) {
-    this.shops = shops;
-    return this;
-  }
-
-  public Product addShop(Shop shop) {
-    this.shops.add(shop);
-    shop.getProducts().add(this);
-    return this;
-  }
-
-  public Product removeShop(Shop shop) {
-    this.shops.remove(shop);
-    shop.getProducts().remove(this);
-    return this;
-  }
-
-  public void setShops(Set<Shop> shops) {
-    this.shops = shops;
-  }
-
   public String getSubtitle() {
     return subtitle;
   }
@@ -158,13 +106,6 @@ public class Product implements Serializable {
     this.subtitle = subtitle;
   }
 
-  public Currency getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(Currency currency) {
-    this.currency = currency;
-  }
 
   public ImageUrl getPreviewImage() {
     return previewImage;
@@ -206,7 +147,6 @@ public class Product implements Serializable {
     return "Product{" +
         "id=" + getId() +
         ", name='" + getName() + "'" +
-        ", price=" + getPrice() +
         "}";
   }
 }

@@ -1,7 +1,6 @@
 package tech.przybysz.pms.productsservice.service.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * A DTO for the {@link tech.przybysz.pms.productsservice.domain.Product} entity.
@@ -12,15 +11,12 @@ public class ProductDTO implements Serializable {
   private String name;
   private String subtitle;
   private String description;
-  private BigDecimal price;
-  private Long currencyId;
   private Long brandId;
   private Long previewImageId;
   private Long categoryId;
 
   private String brandName;
   private String categoryName;
-  private String currencySymbol;
   private String previewImageUrl;
 
   public Long getId() {
@@ -39,14 +35,6 @@ public class ProductDTO implements Serializable {
     this.name = name;
   }
 
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
-
   public Long getBrandId() {
     return brandId;
   }
@@ -61,14 +49,6 @@ public class ProductDTO implements Serializable {
 
   public void setSubtitle(String subtitle) {
     this.subtitle = subtitle;
-  }
-
-  public Long getCurrencyId() {
-    return currencyId;
-  }
-
-  public void setCurrencyId(Long currencyId) {
-    this.currencyId = currencyId;
   }
 
   public Long getPreviewImageId() {
@@ -101,14 +81,6 @@ public class ProductDTO implements Serializable {
 
   public void setBrandName(String brandName) {
     this.brandName = brandName;
-  }
-
-  public String getCurrencySymbol() {
-    return currencySymbol;
-  }
-
-  public void setCurrencySymbol(String currencySymbol) {
-    this.currencySymbol = currencySymbol;
   }
 
   public String getPreviewImageUrl() {
@@ -151,8 +123,6 @@ public class ProductDTO implements Serializable {
         ", name='" + name + '\'' +
         ", subtitle='" + subtitle + '\'' +
         ", description='" + description + '\'' +
-        ", price=" + price +
-        ", currencyId=" + currencyId +
         ", brandId=" + brandId +
         ", previewImageId=" + previewImageId +
         ", categoryId=" + categoryId +

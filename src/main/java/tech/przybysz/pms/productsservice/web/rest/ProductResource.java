@@ -93,13 +93,4 @@ public class ProductResource {
     Optional<ProductFDTO> productDTO = productService.findOneWithFullInfo(id);
     return ResponseUtil.wrapOrNotFound(productDTO);
   }
-
-//  @PostMapping("/products/{id}/shops")
-//  public ResponseEntity<Void> addShopsToProduct(@PathVariable Long id, @RequestBody List<Long> shopIds) {
-//    log.debug("REST request to add Shops to Product : {} : {}", id, shopIds);
-//    productService.addShops(id, shopIds);
-//    return ResponseEntity.noContent()
-//        .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
-//        .build();
-//  }
 }

@@ -18,6 +18,4 @@ public interface ProductService {
   void delete(Long id);
 
   Optional<ProductFDTO> findOneWithFullInfo(Long id);
-
-  //void addShops(Long productId, List<Long> shopIds);
 }

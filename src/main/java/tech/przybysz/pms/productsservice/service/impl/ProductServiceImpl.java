@@ -103,13 +103,4 @@ public class ProductServiceImpl implements ProductService {
     Collection<Product> searchResult = productRepository.findAllByNameContainingIgnoreCaseOrSubtitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrBrandNameContainingIgnoreCaseOrCategoryNameContainingIgnoreCase(q, q, q, q, q, pageReq);
     return searchResult.stream().map(productMapper::toDto).collect(Collectors.toList());
   }
-
-  //  @Override
-//  public void addShops(Long productId, List<Long> shopIds) {
-//    log.debug("Request to add Shops : {} to Product : {}", shopIds, productId);
-//    List<Shop> allById = shopRepository.findAllById(shopIds);
-//    Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("product"));
-//    allById.forEach(product::addShop);
-//    productRepository.save(product);
-//  }
 }
